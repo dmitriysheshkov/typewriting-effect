@@ -1,0 +1,67 @@
+.main {
+    display: flex;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.page-title {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Playfair Display', serif;
+    color: cornsilk;
+    font-size: 32px;
+    z-index: 100;
+}
+
+@keyframes move_wave {
+    0% {
+        transform: translateX(0) translateZ(0) scaleY(1)
+    }
+    50% {
+        transform: translateX(-25%) translateZ(0) scaleY(0.55)
+    }
+    100% {
+        transform: translateX(-50%) translateZ(0) scaleY(1)
+    }
+}
+.waves {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    position: absolute;
+    background-image: linear-gradient(to top, rgb(54, 0, 51), rgb(11, 135, 147));
+}
+
+.waves__wave {
+    position: absolute;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background-repeat: repeat no-repeat;
+    background-position: 0 bottom;
+    transform-origin: center bottom;
+    opacity: 0.5;
+}
+
+.waves__wave--front{
+    background-image: url('http://front-end-noobs.com/jecko/img/wave-top.png');
+    background-size: 50% 100px;
+    animation: move-wave 3s linear infinite;
+}
+
+.waves__wave--middle {
+    background-image: url('http://front-end-noobs.com/jecko/img/wave-top.png');
+    background-size: 50% 120px;
+    animation: move_wave 10s linear infinite;
+}
+
+.waves__wave--back {
+    background-image: url('http://front-end-noobs.com/jecko/img/wave-top.png');
+    background-size: 50% 100px;
+    animation: move_wave 15s linear infinite;
+}
+
