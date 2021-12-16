@@ -10,6 +10,7 @@
     display: flex;
     width: 100%;
     margin: 0;
+    
     justify-content: center;
     align-items: center;
     font-family: 'Playfair Display', serif;
@@ -20,8 +21,9 @@
 }
 
 .page-title__typing {
-    position: relative;
     margin-left: 10px;
+    min-height: 7%;
+    position: relative;
     display: block;
 }
 
@@ -33,7 +35,10 @@
     width: 2px;
     height: 80%;
     background-color: #ffffff;
-    /* animation: blink 1s infinite; */
+}
+
+.page-title__typing--cursor:after {
+    animation: blink 0.5s infinite;
 }
 
 @keyframes blink {
