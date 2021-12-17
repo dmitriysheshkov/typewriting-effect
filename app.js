@@ -1,27 +1,35 @@
 const typing = document.querySelector('.page-title__typing');
+const sounds = document.querySelectorAll('.sound');
+const bgMusic = document.getElementById('bgMusic');
 
-const texts = ['websites!', 'frontend!', 'backend!'];
+const texts = ['Любимая, Натали!', 'Моя жизнь обретает смысл', 'только тогда,', 'когда ты рядом.', 'Ты навсегда в моем сердце.', 'Только когда ты рядом,', 'жизнь становится прекрасной!'];
 let count = 0,
     index = 0,
+    keySound = Math.floor(Math.random() * (sounds.length - 1)) + 1,
+    keyPressTime = 80,
     currentText = '',
     letter = '',
     direction = true;
 
 function blinkCursor(callback, isStart) {
-    console.log('Добавляю стиль');
     typing.classList.add('page-title__typing--cursor');
 
-    let time;
+    let phrasePauseTime;
 
-    isStart ? time = 500 : time = 2000;
+    if (isStart ) {
+        phrasePauseTime = 500;
+    } else {
+        phrasePauseTime = 1000;
+    }
 
-    setTimeout(callback, time);
+    // isStart ? phrasePauseTime = 500 : phrasePauseTime = 1000;
+
+    setTimeout(callback, phrasePauseTime);
 }
 
 function typeText() {
 
     if (index == 0 || index == currentText.length + 1) {
-        console.log('Удаляю стиль');
         typing.classList.remove('page-title__typing--cursor');
     }
 
@@ -31,13 +39,27 @@ function typeText() {
 
     currentText = texts[count];
 
+    sounds[keySound].pause();
+    sounds[keySound].currentTime = 0;
+
     if (direction) {
         letter = currentText.slice(0, index++);
+        keySound = Math.floor(Math.random() * (sounds.length - 1)) + 1;
+        keyPressTime = Math.floor(Math.random() * (100 - 1)) + 50;
+        sounds[keySound].play();
     } else {
         letter = currentText.slice(0, --index);
+
+        keySound = 0;
+        if (currentText.length == index) {
+            sounds[keySound].play();
+        }
+        keyPressTime = 50;
     }
     
     typing.textContent = letter;
+    
+    
 
     if (index === currentText.length + 1) {
         direction = false;
@@ -50,8 +72,15 @@ function typeText() {
         return blinkCursor(typeText, 1);
     }
 
-    setTimeout(typeText, 80);
+    setTimeout(typeText, keyPressTime);
 }
+
+bgMusic.addEventListener('ended', function() {
+    this.currentTime = 0;
+    this.play();
+}, false);
+
+bgMusic.play();
 
 blinkCursor(typeText, 1);
 

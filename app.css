@@ -1,3 +1,10 @@
+@font-face {
+    font-family: "OldTyperNrRegular";
+    src: url("../src/OldTyperNr Regular.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
 .main {
     display: flex;
     height: 100vh;
@@ -13,16 +20,16 @@
     
     justify-content: center;
     align-items: center;
-    font-family: 'Playfair Display', serif;
+    font-family: 'OldTyperNrRegular', serif;
     font-weight: 100;
-    color: cornsilk;
+    color: rgb(102, 0, 97);
     font-size: 32px;
     z-index: 100;
 }
 
 .page-title__typing {
     margin-left: 10px;
-    min-height: 7%;
+    min-height: 4%;
     position: relative;
     display: block;
 }
@@ -34,7 +41,7 @@
     top: 5px;
     width: 2px;
     height: 80%;
-    background-color: #ffffff;
+    background-color: rgb(102, 0, 97);
 }
 
 .page-title__typing--cursor:after {
@@ -62,7 +69,7 @@
     height: 100vh;
     overflow: hidden;
     position: absolute;
-    background-image: linear-gradient(to top, rgb(54, 0, 51), rgb(11, 135, 147));
+    /* background-image: linear-gradient(to top, rgb(54, 0, 51), rgb(11, 135, 147)); */
 }
 
 .waves__wave {
