@@ -10,16 +10,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="app.css">
 </head>
-<body class="main">
+<body class="body">
 
-    <h1 class="page-title"> 
-        <span class="page-title__typing page-title__typing--cursor"> </span>
-    </h1>
+    <main class="scene">
 
-    <div class="waves">
-        <div class="waves__wave waves__wave--front"></div>
-        <div class="waves__wave waves__wave--middle"></div>
-        <div class="waves__wave waves__wave--back"></div>
+        <div class="scene__sun"></div>
+        <div class="scene__bg">
+            <img class="scene__car scene__car--1" src="src/police_car.gif">
+            <img class="scene__car scene__car--2" src="src/police_car.gif">
+        </div>
+
+
+        <h1 class="page-title"> 
+            <span class="page-title__typing page-title__typing--cursor"> </span>
+        </h1>
+
+    </main>
+
+    <div class="modal modal__show">
+        <button class="modal__button" id="startButton">
+            <img class="modal__heart" src="src/heart.svg">
+            <p class="modal__button-text">Прикоснись <span>ко мне!</span></p>
+        </button>
     </div>
 
     <audio src="src/sounds/sound0.mp3" class="sound"></audio>

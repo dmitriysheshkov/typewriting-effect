@@ -1,8 +1,12 @@
+const body = document.querySelector('.body');
+const sun = document.querySelector('.scene__sun');
+const startButton = document.getElementById('startButton');
+const modal = document.querySelector('.modal');
 const typing = document.querySelector('.page-title__typing');
 const sounds = document.querySelectorAll('.sound');
 const bgMusic = document.getElementById('bgMusic');
 
-const texts = ['Любимая, Натали!', 'Моя жизнь обретает смысл', 'только тогда,', 'когда ты рядом.', 'Ты навсегда в моем сердце.', 'Только когда ты рядом,', 'жизнь становится прекрасной!'];
+const texts = ['Любимая, Натали!', 'Нажми на солнышко :)', 'Моя жизнь обретает смысл', 'только тогда,', 'когда ты рядом.', 'Ты навсегда в моем сердце.', 'Только когда ты рядом,', 'жизнь становится прекрасной!'];
 let count = 0,
     index = 0,
     keySound = Math.floor(Math.random() * (sounds.length - 1)) + 1,
@@ -10,6 +14,16 @@ let count = 0,
     currentText = '',
     letter = '',
     direction = true;
+
+sun.addEventListener('click', ()=> body.classList.toggle('dark') );
+
+function start() {
+    modal.classList.remove('modal__show');
+    modal.classList.add('modal__hide');
+
+    bgMusic.play();
+    blinkCursor(typeText, 1);
+}
 
 function blinkCursor(callback, isStart) {
     typing.classList.add('page-title__typing--cursor');
@@ -80,21 +94,4 @@ bgMusic.addEventListener('ended', function() {
     this.play();
 }, false);
 
-bgMusic.play();
-
-blinkCursor(typeText, 1);
-
-
-// function pause(callback) {
-//     console.log('Добавляю стиль');
-//     setTimeout(callback, 2000);
-// }
-
-// function doIt() {
-//     console.log('Удаяю стиль');
-//     console.log(count++);
-
-//     pause(doIt);
-// }
-
-// pause(doIt);
+startButton.addEventListener('click', start);

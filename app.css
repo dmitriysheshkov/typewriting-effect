@@ -1,17 +1,159 @@
 @font-face {
     font-family: "OldTyperNrRegular";
-    src: url("../src/OldTyperNr Regular.ttf") format("truetype");
+    src: url("src/OldTyperNr Regular.ttf") format("truetype");
     font-style: normal;
     font-weight: normal;
 }
 
-.main {
-    display: flex;
-    height: 100vh;
+*,
+*::before,
+*::after {
+    -webkit-box-sizing: inherit;
+            box-sizing: inherit;
+}
+
+html {
+    height: 100%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    background-color: rgb(228, 228, 228);
+    overflow: hidden;
+    
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  -webkit-clip-path: inset(100%);
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+.body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
+/* scene */ 
+.scene {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    background: linear-gradient(#a6d8ff, #ffffff, #ffffff ); 
+}
+
+.dark .scene {
+    background: linear-gradient(to bottom, #0e3361, #0A2342);
+}
+
+.scene__sun {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ffffff;
+    border-radius: 50%;
+    /* background-image: url('src/sun.svg'); */
+    box-shadow: 0 0 50px #ffffff;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.dark .scene__sun {
+    left: 45%;
+    background-color: transparent;
+    background-image: url('src/moon.svg');
+    box-shadow: 0 0 0 #ffffff;
+}
+
+/* .dark .scene__sun:before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    width: 100%;
+    height: 100%;
+    background-color: #0A2342;
+    border-radius: 50%;
+} */
+
+.scene__bg {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 280px;
+    background: url('src/bg.png');
+    background-size: 1500px;
+    background-repeat: repeat-x;
+    animation: animateBG 25s linear infinite;
+}
+
+@keyframes animateBG {
+    0% {
+        background-position: 0px;
+    }
+
+    100% {
+        background-position: 1500px;
+    }
+}
+
+.scene__car {
+    position: absolute;
+    max-width: 200px;
+}
+
+.scene__car--1 {
+    left: -200px;
+    bottom: 20px;
+    z-index: 10;
+    animation: car1 7s linear infinite;
+}
+
+@keyframes car1 {
+    0% {
+        transform: translateX(0px);
+    }
+    90%, 100% {
+        transform: translateX(calc(100vw + 200px));
+    }
+}
+
+.scene__car--2 {
+    right: -200px;
+    bottom: 55px;
+    z-index: 9;
+    animation: car2 12s linear infinite;
+}
+
+@keyframes car2 {
+    0% {
+        transform: translateX(0px) rotateY(180deg);
+    }
+    90%, 100% {
+        transform: translateX(calc(-100vw - 200px)) rotateY(180deg);
+    }
+}
+
+
+
 
 .page-title {
     display: flex;
@@ -22,9 +164,9 @@
     align-items: center;
     font-family: 'OldTyperNrRegular', serif;
     font-weight: 100;
-    color: rgb(102, 0, 97);
+    color: rgb(31 57 122);
     font-size: 32px;
-    z-index: 100;
+    /* z-index: 100; */
 }
 
 .page-title__typing {
@@ -41,7 +183,15 @@
     top: 5px;
     width: 2px;
     height: 80%;
-    background-color: rgb(102, 0, 97);
+    background-color: rgb(31 57 122);
+}
+
+.dark .page-title {
+    color: #ffffff;
+}
+
+.dark .page-title__typing:after {
+    background-color: #ffffff;
 }
 
 .page-title__typing--cursor:after {
@@ -63,53 +213,105 @@
     }
 }
 
-/* background animation */
-.waves {
-    width: 100%;
+/* modal */
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
     height: 100vh;
     overflow: hidden;
-    position: absolute;
-    /* background-image: linear-gradient(to top, rgb(54, 0, 51), rgb(11, 135, 147)); */
-}
-
-.waves__wave {
-    position: absolute;
+    position: fixed;
+    top: 0;
     left: 0;
-    width: 200%;
-    height: 100%;
-    background-repeat: repeat no-repeat;
-    background-position: 0 bottom;
-    transform-origin: center bottom;
-    opacity: 0.3;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    z-index: 1000;
 }
 
-.waves__wave--front{
-    background-image: url('http://front-end-noobs.com/jecko/img/wave-top.png');
-    background-size: 50% 100px;
-    animation: move-wave 3s linear infinite;
+.modal__button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    min-height: 200px;
+    border: 0;
+    background-color: rgba(255, 255, 255, 0);
+    cursor: pointer;
+    transition: 3s;
+    /* transition: .2s all ease-in-out; */
 }
 
-.waves__wave--middle {
-    background-image: url('http://front-end-noobs.com/jecko/img/wave-top.png');
-    background-size: 50% 120px;
-    animation: move_wave 10s linear infinite;
+.modal__show {
+    display: flex;
 }
 
-.waves__wave--back {
-    background-image: url('http://front-end-noobs.com/jecko/img/wave-top.png');
-    background-size: 50% 100px;
-    animation: move_wave 15s linear infinite;
+.modal__hide {
+    display: none;
 }
 
-@keyframes move_wave {
+.modal__heart {
+    margin: 0;
+    margin-bottom: 10px;
+    padding: 0;
+    animation: heart 3s linear infinite;
+}
+
+.modal__button:hover .modal__heart {
+    animation: heart 1s linear infinite;
+}
+
+@keyframes heart {
     0% {
-        transform: translateX(0) translateZ(0) scaleY(1);
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(0.8);
+    }
+    45% {
+        transform: scale(1);
+    }
+    48% {
+        transform: scale(0.9);
     }
     50% {
-        transform: translateX(-25%) translateZ(0) scaleY(0.55);
+        transform: scale(1);
+    }
+    75% {
+        transform: scale(0.8);
+    }
+    95% {
+        transform: scale(1);
+    }
+    98% {
+        transform: scale(0.9);
     }
     100% {
-        transform: translateX(-50%) translateZ(0) scaleY(1);
+        transform: scale(1);
     }
 }
 
+.modal__button-text {
+    text-transform: uppercase;
+    color: #404040;
+    opacity: 0.5;
+}
+
+.modal__button-text span {
+    display: block;
+}
+
+.modal__button:focus .modal__heart {
+    animation: heart-focus 3s linear;
+}
+
+@keyframes heart-focus {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(10);
+    }
+}
