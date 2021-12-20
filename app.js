@@ -1,5 +1,6 @@
 const body = document.querySelector('.body');
 const sun = document.querySelector('.scene__sun');
+const sunPhantom = document.querySelector('.scene__sun-phantom');
 const startButton = document.getElementById('startButton');
 const modal = document.querySelector('.modal');
 const typing = document.querySelector('.page-title__typing');
@@ -15,7 +16,7 @@ let count = 0,
     letter = '',
     direction = true;
 
-sun.addEventListener('click', ()=> body.classList.toggle('dark') );
+sunPhantom.addEventListener('click', ()=> body.classList.toggle('dark') );
 
 function start() {
     modal.classList.remove('modal__show');
